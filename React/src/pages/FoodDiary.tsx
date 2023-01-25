@@ -1,12 +1,39 @@
+import { useState } from "react";
 import styles from "./FoodDiary.module.css";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 function FoodDiary() {
+  const [date, setDate] = useState(new Date());
+
   return (
     <div className={styles.container}>
       <h1 className={styles.mainTitle}>Food Diary</h1>
-      <h2>Food Diary For: </h2>
+      <div
+        style={{
+          textAlign: "center",
+          display: "flex",
+          alignContent: "center",
+          justifyContent: "center",
+          margin: 15,
+        }}
+      >
+        <DatePicker
+          todayButton="Today"
+          popperPlacement="bottom"
+          shouldCloseOnSelect={true}
+          selected={date}
+          onChange={(newDate: Date) => setDate(newDate)}
+          customInput={<button>{date.toDateString()}</button>}
+        />
+      </div>
       <div className={styles.wrapper}>
         <h3>Breakfast</h3>
+        <div>
+          <button>Add Food</button>
+          <button>Quick Tools</button>
+        </div>
         {/* {renderFoodEntries("breakfast")} */}
         <hr></hr>
         <h3>Lunch</h3>
