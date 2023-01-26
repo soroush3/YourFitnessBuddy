@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 function FoodDiary() {
   const [date, setDate] = useState(new Date());
-
+  console.log(date);
   return (
     <div className="w-6/12 m-auto pt-8">
       <h1 className="text-2xl">Food Diary</h1>
