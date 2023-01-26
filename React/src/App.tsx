@@ -1,5 +1,4 @@
 import FoodDiary from "./pages/FoodDiary";
-
 import "./index.css";
 
 function App() {

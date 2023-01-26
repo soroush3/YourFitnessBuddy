@@ -6,7 +6,6 @@ import FoodEntry from "./models/FoodEntry";
 
 config();
 const origins = process.env.ORIGINS!.split(" ");
-origins.forEach((item) => console.warn(item));
 const app = express();
 app.use(express.json());
 app.use(
