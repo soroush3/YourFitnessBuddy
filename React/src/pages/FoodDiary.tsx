@@ -8,70 +8,47 @@ function FoodDiary() {
   const [date, setDate] = useState(new Date());
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.mainTitle}>Food Diary</h1>
-      <div
-        style={{
-          textAlign: "center",
-          display: "flex",
-          alignContent: "center",
-          justifyContent: "center",
-          margin: 15,
-        }}
-      >
+    <div className="w-6/12 m-auto pt-8">
+      <h1 className="text-2xl">Food Diary</h1>
+      <div className="text-center flex p-3">
         <DatePicker
           todayButton="Today"
           popperPlacement="bottom"
           shouldCloseOnSelect={true}
           selected={date}
           onChange={(newDate: Date) => setDate(newDate)}
-          customInput={<button>{date.toDateString()}</button>}
+          customInput={
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              {date.toDateString()}
+            </button>
+          }
         />
       </div>
-      <div className={styles.wrapper}>
-        <h3>Breakfast</h3>
-        <div>
-          <button>Add Food</button>
-          <button>Quick Tools</button>
+      <div className="p-6">
+        <h1 className="text-xl pb-3">Breakfast</h1>
+        <div className="pl-3 space-x-1 inline-flex text-blue-500">
+          <button className="text-sm">Add Food</button>
+          <div className="text-black text-sm">|</div>
+          <button className="text-sm">Quick Tools</button>
         </div>
         {/* {renderFoodEntries("breakfast")} */}
-        <hr></hr>
-        <h3>Lunch</h3>
+        <hr className="my-3" />
+        <h1 className="text-xl pb-3">Lunch</h1>
+        <div className="pl-3 space-x-1 inline-flex text-blue-500">
+          <button className="text-sm">Add Food</button>
+          <div className="text-black text-sm">|</div>
+          <button className="text-sm">Quick Tools</button>
+        </div>
         {/* {renderFoodEntries("lunch")} */}
-        <hr></hr>
-        <h3>Dinner</h3>
+        <hr className="my-3" />
+        <h1 className="text-xl pb-3">Dinner</h1>
+        <div className="pl-3 space-x-1 inline-flex text-blue-500">
+          <button className="text-sm">Add Food</button>
+          <div className="text-black text-sm">|</div>
+          <button className="text-sm">Quick Tools</button>
+        </div>
         {/* {renderFoodEntries("dinner")} */}
-        <hr></hr>
-      </div>
-      <h2>Add Foods</h2>
-      <div className={[styles.wrapper, styles.addFoodsContainer].join(" ")}>
-        <div>
-          <h3>Food</h3>
-          {/* <input
-            type="text"
-            value={foodInput}
-            onChange={handleFoodInputChange}
-          /> */}
-        </div>
-        <div>
-          <h3>Description</h3>
-          {/* <input
-            type="text"
-            value={descriptionInput}
-            onChange={handleDescriptionInputChange}
-          /> */}
-        </div>
-        <div>
-          <h3>Meal</h3>
-          {/* <select value={mealDropdown} onChange={handleMealDropdownChange}>
-            <option value="">Choose Meal</option>
-            <option value="lunch">Breakfast</option>
-            <option value="lunch">Lunch</option>
-            <option value="dinner">Dinner</option>
-          </select> */}
-        </div>
-        {/* <button className={styles.addButton} onClick={addFood}> */}+
-        {/* </button> */}
+        <hr className="my-3" />
       </div>
     </div>
   );
