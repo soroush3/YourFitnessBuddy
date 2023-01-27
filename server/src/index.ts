@@ -1,12 +1,14 @@
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import morgan from "morgan";
 import { config } from "dotenv";
 import FoodEntry from "./models/FoodEntry";
 
 config();
 const origins = process.env.ORIGINS!.split(" ");
 const app = express();
+app.use(morgan("common"));
 app.use(express.json());
 app.use(
   cors({
