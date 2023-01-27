@@ -40,11 +40,7 @@ const FoodEntrySchema = new Schema({
   fat: minNumber, // in grams
   carbs: minNumber, // in grams
   protein: minNumber, // in grams
-  date: {
-    type: Date,
-    default: Date.now(),
-    required: true,
-  },
+  date: { type: Date, default: new Date(), required: true },
 });
 
 const FoodEntry = mongoose.model("FoodEntry", FoodEntrySchema);

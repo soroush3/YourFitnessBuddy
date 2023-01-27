@@ -25,16 +25,55 @@ mongoose.connect(process.env.MONGO_URL!).then(() => {
   });
 });
 
-app.get("/hello", (req: Request, res: Response) => {
-  res.send("hello dude");
+/**
+ * Retrieves all food entries for a given day considering the timezone of the client
+ */
+app.get("/foodEntries/:date/:timeZone", async (req: Request, res: Response) => {
+  const startDate = new Date(req.params.date);
+  const timeZone = req.params.timeZone;
+  startDate.setHours(0, 0, 0); // Set hours, minutes and seconds
+  const followingDay = new Date(startDate.getTime() + 86400000); // add 24 hours
+  // en-CA gives the string as "yyyy-mm-dd", provide it the timeZone just incase
+  const startDateString = startDate.toLocaleDateString("en-CA", {
+    timeZone: timeZone,
+  });
+  const followingDateString = followingDay.toLocaleDateString("en-CA", {
+    timeZone: timeZone,
+  });
+  const foodEntries = await FoodEntry.aggregate([
+    {
+      $project: {
+        title: "$title",
+        calories: "$calories",
+        fat: "$fat",
+        carbs: "$carbs",
+        protein: "$protein",
+        meal: "$meal",
+        date: {
+          // convert the UTC Dates within the db to string format considering timezone
+          $dateToString: {
+            format: "%Y-%m-%d",
+            date: "$date",
+            timezone: timeZone,
+          },
+        },
+      },
+    },
+    {
+      // find the entries for the given day
+      $match: {
+        date: { $gte: startDateString, $lt: followingDateString },
+      },
+    },
+  ]);
+  res.json(foodEntries);
 });
 
 app.post("/foodEntry", async (req: Request, res: Response) => {
-  console.log(req.body);
+  console.log("POST REQUEST");
   const newFoodEntry = new FoodEntry({
-    title: "Some New Entry",
+    title: "NEW NEW ENTERY",
     meal: "breakfast",
-    date: Date.now(),
     calories: {
       count: 50,
       unit: "kcal",
@@ -43,3 +82,5 @@ app.post("/foodEntry", async (req: Request, res: Response) => {
   const createdFoodEntry = await newFoodEntry.save();
   res.json(createdFoodEntry);
 });
+
+// const ConvertOffsetTo
