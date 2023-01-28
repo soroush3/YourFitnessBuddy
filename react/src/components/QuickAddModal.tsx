@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { createFoodEntry, FoodEntry } from "../API";
 
 type Props = {
   mealType: string;
+  date: Date;
+  getFoodEntries: () => Promise<void>;
 };
 
 const INPUT_MACROS = [
@@ -12,8 +15,38 @@ const INPUT_MACROS = [
 ];
 const MEAL_TYPES = ["Breakfast", "Lunch", "Dinner"];
 
-const QuickAddModal = ({ mealType }: Props) => {
+const QuickAddModal = ({ mealType, date, getFoodEntries }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement> | any) => {
+    e.preventDefault();
+    const t = e.target;
+    const foodEntry: FoodEntry = {
+      title: t[1].value,
+      meal: t[0].value.toLowerCase(),
+      calories: {
+        count: Number(t[2].value),
+        unit: "kcal",
+      },
+      fat: {
+        count: Number(t[3].value),
+        unit: "gram",
+      },
+      carbs: {
+        count: Number(t[4].value),
+        unit: "gram",
+      },
+      protein: {
+        count: Number(t[5].value),
+        unit: "gram",
+      },
+      date: date,
+    };
+    await createFoodEntry(foodEntry);
+    getFoodEntries();
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <button
@@ -50,7 +83,20 @@ const QuickAddModal = ({ mealType }: Props) => {
                hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
               onClick={() => setIsModalOpen(false)}
             >
-              Close
+              <svg
+                aria-hidden="true"
+                className="w-5 h-5"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 
+                  1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              <span className="sr-only">Close modal</span>
             </button>
             <div className="px-6 py-2 lg:px-8">
               <h3 className="mb-10 text-xl font-medium text-gray-900 dark:text-white">
@@ -58,23 +104,19 @@ const QuickAddModal = ({ mealType }: Props) => {
               </h3>
               <form
                 id="quickAddModal"
+                name="quickAddModal"
                 className="space-y-6"
-                onSubmit={(e: React.FormEvent<HTMLFormElement> | any) => {
-                  console.log(e.target[0].value);
-                  console.log(e.target[1].value);
-                  console.log(e.target[2].value);
-                  console.log(e.target[3].value);
-                  setIsModalOpen(false);
-                }}
+                onSubmit={handleSubmit}
               >
                 <div>
                   <label
-                    htmlFor="select"
+                    htmlFor="mealType"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Meal Name
+                    Meal Type
                   </label>
                   <select
+                    id="mealType"
                     required
                     defaultValue={mealType}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
@@ -89,6 +131,23 @@ const QuickAddModal = ({ mealType }: Props) => {
                       );
                     })}
                   </select>
+                </div>
+                <div>
+                  <label
+                    htmlFor="mealName"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Meal Name
+                  </label>
+                  <input
+                    id="mealName"
+                    type="text"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                           focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600
+                            dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    placeholder="Meal Name (Required)"
+                    required
+                  />
                 </div>
                 {INPUT_MACROS.map((macro) => {
                   const placeholder =
