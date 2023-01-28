@@ -72,17 +72,7 @@ app.get("/foodEntries/:date/:timeZone", async (req: Request, res: Response) => {
 });
 
 app.post("/foodEntry", async (req: Request, res: Response) => {
-  console.log("POST REQUEST");
-  const newFoodEntry = new FoodEntry({
-    title: "NEW NEW ENTERY",
-    meal: "breakfast",
-    calories: {
-      count: 50,
-      unit: "kcal",
-    },
-  });
+  const newFoodEntry = new FoodEntry(req.body);
   const createdFoodEntry = await newFoodEntry.save();
   res.json(createdFoodEntry);
 });
-
-// const ConvertOffsetTo
