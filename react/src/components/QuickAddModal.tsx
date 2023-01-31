@@ -50,7 +50,7 @@ const QuickAddModal = ({ mealType, date, getFoodEntries }: Props) => {
   return (
     <>
       <button
-        className="text-sm"
+        className="text-sm hover:text-blue-400"
         onClick={() => {
           setIsModalOpen(!isModalOpen);
         }}
