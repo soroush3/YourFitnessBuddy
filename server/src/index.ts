@@ -76,3 +76,9 @@ app.post("/foodEntry", async (req: Request, res: Response) => {
   const createdFoodEntry = await newFoodEntry.save();
   res.json(createdFoodEntry);
 });
+
+app.delete("/foodEntry/:foodEntryId", async (req: Request, res: Response) => {
+  const foodEntryId = req.params.foodEntryId;
+  const foodEntry = await FoodEntry.findByIdAndDelete(foodEntryId);
+  res.json(foodEntry);
+});
