@@ -60,7 +60,7 @@ const QuickAddModal = ({ mealType, date, getFoodEntries }: Props) => {
       {isModalOpen ? (
         // modal backdrop
         <div
-          className="fixed top-0 bottom-0 -left-[4px] right-0 flex justify-center items-center z-10"
+          className="fixed -left-4 right-0 top-0 bottom-0 flex justify-center items-center z-10"
           tabIndex={-1}
           style={{ backgroundColor: "rgba(0, 0, 0, 0.4)" }}
           onClick={() => {
@@ -71,7 +71,6 @@ const QuickAddModal = ({ mealType, date, getFoodEntries }: Props) => {
           <div
             aria-hidden={true}
             className="w-[500px] min-h-[300] p-6 bg-white relative rounded-lg shadow dark:bg-gray-700"
-            // className="fixed top-0 bottom-0 left-0 right-0 bg-slate-800 flex justify-center items-center z-10"
             onClick={(e) => {
               // do not close modal if anything inside modal content is clicked
               e.stopPropagation();
