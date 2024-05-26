@@ -12,11 +12,11 @@ export type FoodEntry = {
   fat: {count: number; unit: string};
   carbs: {count: number; unit: string};
   protein: {count: number; unit: string};
-  date: Date;
+  date: string;
 };
 
 export const getFoodEntriesForDate = async (
-  date: Date
+  date: string
 ): Promise<FoodEntry[]> => {
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   // timeZone has '/' between, ex: America/Detroit, encodeURI changes to America%2Detroit

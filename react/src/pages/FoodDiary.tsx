@@ -1,7 +1,5 @@
 import {useEffect, useState} from "react";
 import QuickAddModal from "../components/QuickAddModal";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import "./FoodDiary.css";
 
 import {FoodEntry, getFoodEntriesForDate, deleteFoodEntry} from "../API";
@@ -10,7 +8,7 @@ import {Fragment} from "react";
 const MEAL_TYPES = ["Breakfast", "Lunch", "Dinner"];
 
 const FoodDiary = () => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date().toLocaleDateString("en-CA"));
   const [foodEntries, setFoodEntries] = useState<Array<FoodEntry>>([]);
 
   const getFoodEntries = async () => {
@@ -31,19 +29,11 @@ const FoodDiary = () => {
   return (
     <div className="wrapper">
       <div className="container">
-        <div className="text-center flex p-3">
-          {/* <input type="date" /> */}
-          <DatePicker
-            todayButton="Today"
-            popperPlacement="bottom"
-            shouldCloseOnSelect={true}
-            selected={date}
-            onChange={(newDate: Date) => setDate(newDate)}
-            customInput={
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                {date.toDateString()}
-              </button>
-            }
+        <div className="date-input">
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
           />
         </div>
         <div className="pt-8">

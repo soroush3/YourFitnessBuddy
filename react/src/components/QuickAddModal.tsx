@@ -2,9 +2,9 @@ import {useState} from "react";
 import {createFoodEntry, FoodEntry} from "../API";
 
 type Props = {
-  mealType: string;
-  date: Date;
-  getFoodEntries: () => Promise<void>;
+  readonly mealType: string;
+  readonly date: string;
+  readonly getFoodEntries: () => Promise<void>;
 };
 
 const INPUT_MACROS = [
