@@ -1,0 +1,13 @@
+.delete-button {
+  display: block;
+  margin: auto;
+}
+
+.delete-svg {
+  width: 10px;
+  height: 10px;
+}
+
+.delete-button:hover {
+  fill: red;
+}

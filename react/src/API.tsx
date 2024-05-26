@@ -37,7 +37,6 @@ export const createFoodEntry = async (foodEntry: FoodEntry) => {
 };
 
 export const deleteFoodEntry = async (foodEntryId: string) => {
-  console.log(foodEntryId);
   const response = await fetch(`${API_URL}/foodEntry/${foodEntryId}`, {
     method: "DELETE",
   });

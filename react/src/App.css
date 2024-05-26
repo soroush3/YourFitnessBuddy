@@ -1,14 +1,27 @@
+.nav-wrapper {
+  display: block;
+  max-width: 1440px;
+  margin: auto;
+}
+
 .nav-container {
   display: flex;
   padding-left: 20px;
   padding-right: 20px;
   align-items: center;
+  background: linear-gradient(to right, rgb(79, 79, 255), #2424ff);
+  border-radius: 10px;
 }
 
 .buddy-nav {
   display: flex;
   align-items: center;
   column-gap: 5px;
+}
+
+.buddy-nav a,
+.middle-nav a {
+  color: white;
 }
 
 .middle-nav {

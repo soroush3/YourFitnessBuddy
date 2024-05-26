@@ -1,10 +1,13 @@
 import {useState} from "react";
-import {createFoodEntry, FoodEntry} from "../API";
+import {FoodEntry} from "../API";
+import {MEAL_TYPES} from "./DiaryTable";
 
-type Props = {
+import "./QuickAddModal.css";
+
+type QuickAddModalProps = {
   readonly mealType: string;
   readonly date: string;
-  readonly getFoodEntries: () => Promise<void>;
+  readonly handleCreateEntry?: (foodEntry: FoodEntry) => Promise<void>;
 };
 
 const INPUT_MACROS = [
@@ -13,9 +16,12 @@ const INPUT_MACROS = [
   {type: "Carbs", unit: "g"},
   {type: "Protein", unit: "g"},
 ];
-const MEAL_TYPES = ["Breakfast", "Lunch", "Dinner"];
 
-const QuickAddModal = ({mealType, date, getFoodEntries}: Props) => {
+const QuickAddModal = ({
+  mealType,
+  date,
+  handleCreateEntry,
+}: QuickAddModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -46,8 +52,7 @@ const QuickAddModal = ({mealType, date, getFoodEntries}: Props) => {
     };
 
     try {
-      await createFoodEntry(foodEntry);
-      await getFoodEntries();
+      await handleCreateEntry?.(foodEntry);
     } catch (err) {}
     setIsLoading(false);
     setIsModalOpen(false);
@@ -76,7 +81,7 @@ const QuickAddModal = ({mealType, date, getFoodEntries}: Props) => {
           {/* model contents */}
           <div
             aria-hidden={true}
-            className="w-[500px] min-h-[300] p-6 bg-white relative rounded-lg shadow dark:bg-gray-700"
+            className="modal-container"
             onClick={(e) => {
               // do not close modal if anything inside modal content is clicked
               e.stopPropagation();
@@ -125,9 +130,7 @@ const QuickAddModal = ({mealType, date, getFoodEntries}: Props) => {
                     name="meal-type"
                     required
                     defaultValue={mealType}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                           focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600
-                            dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    className="input"
                   >
                     {MEAL_TYPES.map((type) => {
                       return (
@@ -149,9 +152,7 @@ const QuickAddModal = ({mealType, date, getFoodEntries}: Props) => {
                     id="mealName"
                     name="meal-name"
                     type="text"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                           focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600
-                            dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    className="input"
                     placeholder="Meal Name (Required)"
                     required
                   />
@@ -172,9 +173,7 @@ const QuickAddModal = ({mealType, date, getFoodEntries}: Props) => {
                         id={macro.type}
                         name={macro.type}
                         type="number"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                           focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600
-                            dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        className="input"
                         placeholder={placeholder}
                         required={macro.type == "Calories"}
                         min={0}
