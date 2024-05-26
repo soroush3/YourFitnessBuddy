@@ -8,10 +8,10 @@ export type FoodEntry = {
   _id?: string;
   title: string;
   meal: string;
-  calories: { count: number; unit: string };
-  fat: { count: number; unit: string };
-  carbs: { count: number; unit: string };
-  protein: { count: number; unit: string };
+  calories: {count: number; unit: string};
+  fat: {count: number; unit: string};
+  carbs: {count: number; unit: string};
+  protein: {count: number; unit: string};
   date: Date;
 };
 

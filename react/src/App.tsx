@@ -1,16 +1,26 @@
 import FoodDiary from "./pages/FoodDiary";
 import "./index.css";
+import "./App.css";
+
+import myBuddy from "./assets/terrance-philip.jpg";
 
 function App() {
   return (
-    <div className="pt-6">
-      <nav>
-        <h1 className="text-slate-700 text-center text-4xl">
-          YourFitnessBuddy
-        </h1>
-      </nav>
+    <div>
+      <div className="nav-container">
+        <div className="buddy-nav">
+          <a href="/">YourFitnessBuddy</a>
+          <img width={"50px"} height={"50px"} src={myBuddy} />
+        </div>
 
-      <FoodDiary></FoodDiary>
+        <div className="middle-nav">
+          <nav>
+            <a href="/food-diary">Food Diary</a>
+          </nav>
+        </div>
+      </div>
+
+      <FoodDiary />
     </div>
   );
 }

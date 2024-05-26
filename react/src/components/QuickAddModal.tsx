@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { createFoodEntry, FoodEntry } from "../API";
+import {useState} from "react";
+import {createFoodEntry, FoodEntry} from "../API";
 
 type Props = {
   mealType: string;
@@ -8,42 +8,48 @@ type Props = {
 };
 
 const INPUT_MACROS = [
-  { type: "Calories", unit: "kcal" },
-  { type: "Fats", unit: "g" },
-  { type: "Carbs", unit: "g" },
-  { type: "Protein", unit: "g" },
+  {type: "Calories", unit: "kcal"},
+  {type: "Fats", unit: "g"},
+  {type: "Carbs", unit: "g"},
+  {type: "Protein", unit: "g"},
 ];
 const MEAL_TYPES = ["Breakfast", "Lunch", "Dinner"];
 
-const QuickAddModal = ({ mealType, date, getFoodEntries }: Props) => {
+const QuickAddModal = ({mealType, date, getFoodEntries}: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement> | any) => {
     e.preventDefault();
-    const t = e.target;
+    if (isLoading) return;
+    const formData = new FormData(e.target);
     const foodEntry: FoodEntry = {
-      title: t[1].value,
-      meal: t[0].value.toLowerCase(),
+      title: formData.get("meal-name")?.toString() ?? "",
+      meal: formData.get("meal-type")?.toString().toLowerCase() ?? "",
       calories: {
-        count: Number(t[2].value),
+        count: Number(formData.get("Calories")?.toString()),
         unit: "kcal",
       },
       fat: {
-        count: Number(t[3].value),
+        count: Number(formData.get("Fats")),
         unit: "gram",
       },
       carbs: {
-        count: Number(t[4].value),
+        count: Number(formData.get("Carbs")),
         unit: "gram",
       },
       protein: {
-        count: Number(t[5].value),
+        count: Number(formData.get("Protein")),
         unit: "gram",
       },
       date: date,
     };
-    await createFoodEntry(foodEntry);
-    getFoodEntries();
+
+    try {
+      await createFoodEntry(foodEntry);
+      await getFoodEntries();
+    } catch (err) {}
+    setIsLoading(false);
     setIsModalOpen(false);
   };
 
@@ -62,7 +68,7 @@ const QuickAddModal = ({ mealType, date, getFoodEntries }: Props) => {
         <div
           className="fixed -left-4 right-0 top-0 bottom-0 flex justify-center items-center z-10"
           tabIndex={-1}
-          style={{ backgroundColor: "rgba(0, 0, 0, 0.4)" }}
+          style={{backgroundColor: "rgba(0, 0, 0, 0.4)"}}
           onClick={() => {
             setIsModalOpen(false);
           }}
@@ -116,6 +122,7 @@ const QuickAddModal = ({ mealType, date, getFoodEntries }: Props) => {
                   </label>
                   <select
                     id="mealType"
+                    name="meal-type"
                     required
                     defaultValue={mealType}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
@@ -140,6 +147,7 @@ const QuickAddModal = ({ mealType, date, getFoodEntries }: Props) => {
                   </label>
                   <input
                     id="mealName"
+                    name="meal-name"
                     type="text"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                            focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600
@@ -155,13 +163,14 @@ const QuickAddModal = ({ mealType, date, getFoodEntries }: Props) => {
                   return (
                     <div key={macro.type}>
                       <label
-                        htmlFor="quantity"
+                        htmlFor={macro.type}
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
                         {`${macro.type} (${macro.unit})`}
                       </label>
                       <input
                         id={macro.type}
+                        name={macro.type}
                         type="number"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                            focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600
@@ -176,6 +185,7 @@ const QuickAddModal = ({ mealType, date, getFoodEntries }: Props) => {
                 <button
                   form="quickAddModal"
                   type="submit"
+                  disabled={isLoading}
                   className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
                    focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center 
                    dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import QuickAddModal from "../components/QuickAddModal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { FoodEntry, getFoodEntriesForDate, deleteFoodEntry } from "../API";
+import {FoodEntry, getFoodEntriesForDate, deleteFoodEntry} from "../API";
 import React from "react";
 
 const MEAL_TYPES = ["Breakfast", "Lunch", "Dinner"];
 
 const FoodDiary = () => {
   const [date, setDate] = useState(new Date());
-  const [foodEntries, setFoodEntries] = useState(Array<FoodEntry>);
+  const [foodEntries, setFoodEntries] = useState<Array<FoodEntry>>([]);
 
   const getFoodEntries = async () => {
     const entries = await getFoodEntriesForDate(date);
@@ -29,7 +29,6 @@ const FoodDiary = () => {
 
   return (
     <div className="max-w-[800px] m-auto pt-8">
-      <h1 className="text-2xl">Food Diary</h1>
       <div className="text-center flex p-3">
         <DatePicker
           todayButton="Today"
