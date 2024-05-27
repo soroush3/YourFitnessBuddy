@@ -1,0 +1,39 @@
+.diary-table-container {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1.5px rgb(67, 67, 233) solid;
+  background-color: rgb(243, 243, 243);
+}
+
+.breakfast-td {
+  user-select: none;
+  background-color: rgb(67, 67, 233);
+  color: white;
+  text-align: center;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.entry-row {
+  font-size: 15px;
+  background-color: rgb(204, 214, 224);
+}
+
+.quantity-col {
+  text-align: center;
+}
+
+.purp-text {
+  color: rgb(67, 67, 233);
+  font-weight: 600;
+}
+
+.add-buttons {
+  display: flex;
+  margin-top: 5px;
+  column-gap: 5px;
+}
+
+.text-center {
+  text-align: center;
+}

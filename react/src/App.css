@@ -1,22 +1,42 @@
 .nav-wrapper {
-  display: block;
-  max-width: 1440px;
-  margin: auto;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 35px;
+  background: linear-gradient(to right, rgb(79, 79, 255), #2424ff);
 }
 
 .nav-container {
   display: flex;
+  max-width: 1000px;
+  margin: auto;
+  height: 35px;
   padding-left: 20px;
-  padding-right: 20px;
   align-items: center;
-  background: linear-gradient(to right, rgb(79, 79, 255), #2424ff);
-  border-radius: 10px;
 }
 
 .buddy-nav {
   display: flex;
   align-items: center;
-  column-gap: 5px;
+  column-gap: 10px;
+}
+
+.nav-button {
+  border-left: 1px solid lightblue;
+  border-right: 1px solid lightblue;
+  padding: 0 10px 0 10px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-button:hover {
+  color: lightblue;
+}
+
+.nav-button:first-child {
+  border-right: none;
 }
 
 .buddy-nav a,
@@ -26,7 +46,9 @@
 
 .middle-nav {
   display: flex;
+  height: 35px;
+  align-items: center;
   justify-content: center;
   left: 50%;
-  position: absolute;
+  position: fixed;
 }

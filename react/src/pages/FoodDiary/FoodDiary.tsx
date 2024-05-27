@@ -6,10 +6,11 @@ import {
   getFoodEntriesForDate,
   deleteFoodEntry,
   createFoodEntry,
-} from "../API";
-import DiaryTable from "../components/DiaryTable";
+} from "../../API";
+import DiaryTable from "../../components/DiaryTable/DiaryTable";
+import DateInput from "../../components/DateInput/DateInput";
 
-const FoodDiary = () => {
+function FoodDiary() {
   const [date, setDate] = useState(new Date().toLocaleDateString("en-CA"));
   const [foodEntries, setFoodEntries] = useState<Array<FoodEntry>>([]);
 
@@ -34,15 +35,9 @@ const FoodDiary = () => {
 
   return (
     <div className="wrapper">
-      <div className="container">
-        <div className="date-input">
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-        </div>
-        <div className="pt-8">
+      <DateInput date={date} handleDateChange={(newDate) => setDate(newDate)} />
+      <div className="main-content">
+        <div className="main-container">
           <DiaryTable
             foodEntries={foodEntries}
             date={date}
@@ -50,9 +45,11 @@ const FoodDiary = () => {
             handleDeleteEntry={handleDeleteEntry}
           />
         </div>
+
+        <div className="side-container">hello</div>
       </div>
     </div>
   );
-};
+}
 
 export default FoodDiary;

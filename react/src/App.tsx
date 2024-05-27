@@ -1,4 +1,4 @@
-import FoodDiary from "./pages/FoodDiary";
+import FoodDiary from "./pages/FoodDiary/FoodDiary";
 import "./index.css";
 import "./App.css";
 
@@ -11,18 +11,25 @@ function App() {
         <div className="nav-container">
           <div className="buddy-nav">
             <a href="/">YourFitnessBuddy</a>
-            <img width={"50px"} height={"50px"} src={myBuddy} />
+            <img
+              style={{objectFit: "cover", width: "35px", height: "35px"}}
+              src={myBuddy}
+            />
           </div>
-
-          <div className="middle-nav">
-            <nav>
-              <a href="/food-diary">Food Diary</a>
-            </nav>
-          </div>
+          <nav className="middle-nav">
+            <a className="nav-button" href="/food-diary">
+              Food Diary
+            </a>
+            <a className="nav-button" href="/">
+              Temp
+            </a>
+          </nav>
         </div>
       </div>
 
-      <FoodDiary />
+      <div style={{marginTop: "30px"}}>
+        <FoodDiary />
+      </div>
     </div>
   );
 }

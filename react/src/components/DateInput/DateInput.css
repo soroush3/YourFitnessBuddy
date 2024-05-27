@@ -1,0 +1,13 @@
+.date-input {
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.date-button {
+  height: 25px;
+  width: 25px;
+  font-size: 20px;
+}

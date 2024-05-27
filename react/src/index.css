@@ -11,4 +11,10 @@ a {
 
 button {
   cursor: pointer;
+  border-radius: 8px;
+  border: 1px rgb(67, 67, 233) solid;
+}
+
+button:hover {
+  background: rgb(179, 180, 255);
 }

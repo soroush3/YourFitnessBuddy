@@ -1,13 +1,13 @@
 .delete-button {
-  display: block;
-  margin: auto;
-}
-
-.delete-svg {
-  width: 10px;
-  height: 10px;
+  display: flex;
+  border-color: red;
 }
 
 .delete-button:hover {
-  fill: red;
+  background: rgb(255, 155, 155);
+}
+
+.delete-svg {
+  width: 12px;
+  height: 12px;
 }
