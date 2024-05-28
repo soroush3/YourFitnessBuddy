@@ -7,8 +7,9 @@ type DateInputProps = {
 
 export default function DateInput({date, handleDateChange}: DateInputProps) {
   const handleIncrementalChange = (change: number) => {
-    const dateObj = new Date(date);
-    dateObj.setDate(dateObj.getUTCDate() + change);
+    const [year, month, day] = date.split("-").map((val) => Number(val));
+    const dateObj = new Date(year, month - 1, day);
+    dateObj.setDate(dateObj.getDate() + change);
     handleDateChange(dateObj.toLocaleDateString("en-CA"));
   };
 
