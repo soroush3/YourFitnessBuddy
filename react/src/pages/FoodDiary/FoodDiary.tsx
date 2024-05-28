@@ -66,11 +66,9 @@ function FoodDiary() {
 
         <div className="side-container">
           <p className="text-center">
-            Total Calories: <b className="purp-text">{totalCalories}</b>
+            <b className="purp-text">Total Calories: {totalCalories}</b>
           </p>
-
           <hr />
-
           <BarChart
             data={[
               {color: "blueviolet", value: totalFat},
@@ -78,15 +76,15 @@ function FoodDiary() {
               {color: "rgb(67, 67, 233)", value: totalProtein},
             ]}
           />
-          <div className="flex center margin-top col-gap">
+          <div className="macro-breakdown">
             <div style={{color: "blueviolet"}}>
-              Fat: <b>{totalFat}</b>
+              <b>Fat: {totalFat}</b>
             </div>
             <div style={{color: "orange"}}>
-              Carbs: <b>{totalCarbs}</b>
+              <b>Carbs: {totalCarbs}</b>
             </div>
             <div style={{color: "rgb(67, 67, 233)"}}>
-              Protein: <b>{totalProtein}</b>
+              <b>Protein: {totalProtein}</b>
             </div>
           </div>
         </div>

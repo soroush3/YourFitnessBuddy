@@ -10,7 +10,7 @@ function App() {
       <div className="nav-wrapper">
         <div className="nav-container">
           <div className="buddy-nav">
-            <a href="/">YourFitnessBuddy</a>
+            <a href="/">YourFitnessBuddy™</a>
             <a
               target="_blank"
               rel="noopener noreferrer"

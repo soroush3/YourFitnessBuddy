@@ -52,10 +52,16 @@
   position: fixed;
   left: 0;
   right: 0;
-  top: -30%;
+  top: -300px;
   bottom: 0;
-  z-index: 10;
+  z-index: 105;
   background-color: rgba(0, 0, 0, 0.4);
+}
+
+@media (max-height: 1000px) {
+  .modal-backdrop {
+    top: 0;
+  }
 }
 
 .input {

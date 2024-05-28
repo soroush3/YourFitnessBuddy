@@ -21,6 +21,13 @@
 }
 
 .side-container {
-  width: 250px;
-  min-width: 200px;
+  width: 300px;
+}
+
+.macro-breakdown {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10px;
+  column-gap: 25px;
 }

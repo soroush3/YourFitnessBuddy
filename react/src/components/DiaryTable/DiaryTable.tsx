@@ -45,7 +45,6 @@ export default function DiaryTable({
         </colgroup>
         <tbody>
           {MEALS.map((mealType, idx) => {
-            // calories, fat, carbs, protein, number of entries for meal type
             const totals = {
               calories: 0,
               fat: 0,
@@ -109,7 +108,6 @@ export default function DiaryTable({
                         <td className="quantity-col">{entry.carbs.count}</td>
                         <td className="quantity-col">{entry.protein.count}</td>
                         <td>
-                          {/* Delete entry button */}
                           <DeleteButton
                             handleDelete={() => handleDeleteEntry?.(entry._id!)}
                           />
