@@ -18,3 +18,8 @@ button {
 button:hover {
   background: rgb(179, 180, 255);
 }
+
+.purp-border {
+  border: 1px rgb(67, 67, 233) solid;
+  border-radius: 10px;
+}

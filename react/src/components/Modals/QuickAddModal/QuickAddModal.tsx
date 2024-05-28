@@ -33,6 +33,7 @@ const QuickAddModal = ({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement> | any) => {
     e.preventDefault();
+    setIsLoading(true);
     if (isLoading) return;
     const formData = new FormData(e.target);
     const foodEntry: FoodEntry = {
@@ -59,9 +60,9 @@ const QuickAddModal = ({
 
     try {
       await handleCreateEntry?.(foodEntry);
+      closeModal();
+      setIsLoading(false);
     } catch (err) {}
-    setIsLoading(false);
-    closeModal();
   };
 
   return (
