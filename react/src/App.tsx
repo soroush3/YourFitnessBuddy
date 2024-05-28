@@ -2,7 +2,7 @@ import FoodDiary from "./pages/FoodDiary/FoodDiary";
 import "./index.css";
 import "./App.css";
 
-import myBuddy from "./assets/terrance-philip.jpg";
+import myBuddy from "../public/terrance-philip-logo-transparent.png";
 
 function App() {
   return (
@@ -12,7 +12,12 @@ function App() {
           <div className="buddy-nav">
             <a href="/">YourFitnessBuddy</a>
             <img
-              style={{objectFit: "cover", width: "35px", height: "35px"}}
+              style={{
+                objectFit: "contain",
+                width: "75px",
+                height: "75px",
+                marginTop: "20px",
+              }}
               src={myBuddy}
             />
           </div>
