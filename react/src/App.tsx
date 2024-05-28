@@ -11,15 +11,13 @@ function App() {
         <div className="nav-container">
           <div className="buddy-nav">
             <a href="/">YourFitnessBuddy</a>
-            <img
-              style={{
-                objectFit: "contain",
-                width: "75px",
-                height: "75px",
-                marginTop: "20px",
-              }}
-              src={myBuddy}
-            />
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://youtu.be/m1JakODvYhA?si=E4zriM5M3sVIFjjY&t=18"
+            >
+              <img className="buddy-image" src={myBuddy} />
+            </a>
           </div>
           <nav className="middle-nav">
             <a className="nav-button" href="/food-diary">

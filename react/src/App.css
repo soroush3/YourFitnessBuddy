@@ -53,6 +53,15 @@
   position: fixed;
 }
 
+.buddy-image {
+  object-fit: contain;
+  margin-top: 20px;
+  width: 75px;
+  height: 75px;
+  user-select: none;
+  cursor: pointer;
+}
+
 .flex {
   display: flex;
 }

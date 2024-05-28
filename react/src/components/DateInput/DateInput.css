@@ -4,6 +4,7 @@
   column-gap: 10px;
   text-align: center;
   padding-bottom: 10px;
+  z-index: 100;
 }
 
 .date-button {
